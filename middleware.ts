@@ -12,17 +12,11 @@ export async function middleware(req: NextRequest) {
 			data: { session },
 		} = await supabase.auth.getSession()
 
+		const publicPaths = ["/", "/login", "/signup"]
+		const isPublicPath = publicPaths.includes(req.nextUrl.pathname)
+
 		// If no session and trying to access protected routes
-		if (
-			!session &&
-			(req.nextUrl.pathname.startsWith("/dashboard") ||
-				req.nextUrl.pathname.startsWith("/accounts") ||
-				req.nextUrl.pathname.startsWith("/transactions") ||
-				req.nextUrl.pathname.startsWith("/budgets") ||
-				req.nextUrl.pathname.startsWith("/goals") ||
-				req.nextUrl.pathname.startsWith("/profile") ||
-				req.nextUrl.pathname.startsWith("/reports"))
-		) {
+		if (!session && !isPublicPath) {
 			const redirectUrl = req.nextUrl.clone()
 			redirectUrl.pathname = "/login"
 			redirectUrl.searchParams.set(`redirectedFrom`, req.nextUrl.pathname)
@@ -44,5 +38,8 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-	matcher: ["/((?!api|_next/static|_next/image|favicon.ico|placeholder.svg).*)"],
+	matcher: [
+		'/', // Include the root path
+		'/((?!api|_next/static|_next/image|favicon.ico|placeholder.svg).*)',
+	],
 }
