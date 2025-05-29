@@ -1,8 +1,8 @@
 import type React from "react"
 import Link from "next/link"
-import { WalletIcon } from "lucide-react"
+import { WalletIcon, Menu } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { ThemeToggle } from "@/components/theme-toggle"
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 
 export default function MarketingLayout({
   children,
@@ -10,72 +10,80 @@ export default function MarketingLayout({
   children: React.ReactNode
 }) {
   return (
-    <div className="flex min-h-screen flex-col">
-      <header className="sticky top-0 z-50 w-full border-b bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl supports-[backdrop-filter]:bg-white/60 dark:supports-[backdrop-filter]:bg-slate-900/60 shadow-lg">
+    <div className="flex flex-col min-h-screen">
+      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-16 items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 font-bold group">
-            <div className="p-2 rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 shadow-lg group-hover:shadow-purple-500/25 transition-all duration-300 group-hover:scale-110">
-              <WalletIcon className="h-6 w-6 text-white" />
-            </div>
-            <span className="text-xl bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+          <Link href="/" className="flex items-center space-x-2">
+            <WalletIcon className="h-8 w-8 text-primary" />
+            <span className="text-xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent">
               FinTrack
             </span>
           </Link>
 
-          <nav className="hidden md:flex items-center gap-8">
-            {[
-              { href: "#features", label: "Features" },
-              { href: "#testimonials", label: "Testimonials" },
-              { href: "#pricing", label: "Pricing" },
-              { href: "#faq", label: "FAQ" },
-            ].map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="text-sm font-medium hover:text-transparent hover:bg-gradient-to-r hover:from-purple-600 hover:to-pink-600 hover:bg-clip-text transition-all duration-300 relative group"
-              >
-                {item.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-500 to-pink-500 group-hover:w-full transition-all duration-300"></span>
-              </Link>
-            ))}
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-6">
+            <Link href="#features" className="text-sm font-medium hover:text-primary transition-colors">
+              Features
+            </Link>
+            <Link href="#pricing" className="text-sm font-medium hover:text-primary transition-colors">
+              Pricing
+            </Link>
+            <Link href="#testimonials" className="text-sm font-medium hover:text-primary transition-colors">
+              Testimonials
+            </Link>
+            <Link href="#faq" className="text-sm font-medium hover:text-primary transition-colors">
+              FAQ
+            </Link>
           </nav>
 
-          <div className="flex items-center gap-4">
-            <ThemeToggle />
-            <div className="hidden md:flex items-center gap-4">
-              <Button variant="ghost" asChild className="hover:bg-purple-50 dark:hover:bg-purple-900/20">
-                <Link href="/login">Log in</Link>
-              </Button>
-              <Button
-                asChild
-                className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white shadow-lg hover:shadow-purple-500/25 transition-all duration-300 hover:scale-105"
-              >
-                <Link href="/signup">Sign up</Link>
-              </Button>
-            </div>
+          {/* Desktop Auth Buttons */}
+          <div className="hidden md:flex items-center space-x-4">
+            <Button variant="ghost" asChild>
+              <Link href="/login">Login</Link>
+            </Button>
             <Button
-              variant="outline"
-              size="icon"
-              className="md:hidden border-purple-200 hover:bg-purple-50 dark:border-purple-700 dark:hover:bg-purple-900/20"
+              asChild
+              className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="h-6 w-6"
-              >
-                <line x1="4" x2="20" y1="12" y2="12" />
-                <line x1="4" x2="20" y1="6" y2="6" />
-                <line x1="4" x2="20" y1="18" y2="18" />
-              </svg>
+              <Link href="/signup">Get Started</Link>
             </Button>
           </div>
+
+          {/* Mobile Navigation */}
+          <Sheet>
+            <SheetTrigger asChild className="md:hidden">
+              <Button variant="ghost" size="icon">
+                <Menu className="h-5 w-5" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-[300px] sm:w-[400px]">
+              <nav className="flex flex-col space-y-4">
+                <Link href="#features" className="text-lg font-medium hover:text-primary transition-colors">
+                  Features
+                </Link>
+                <Link href="#pricing" className="text-lg font-medium hover:text-primary transition-colors">
+                  Pricing
+                </Link>
+                <Link href="#testimonials" className="text-lg font-medium hover:text-primary transition-colors">
+                  Testimonials
+                </Link>
+                <Link href="#faq" className="text-lg font-medium hover:text-primary transition-colors">
+                  FAQ
+                </Link>
+                <div className="flex flex-col space-y-2 pt-4">
+                  <Button variant="ghost" asChild>
+                    <Link href="/login">Login</Link>
+                  </Button>
+                  <Button
+                    asChild
+                    className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
+                  >
+                    <Link href="/signup">Get Started</Link>
+                  </Button>
+                </div>
+              </nav>
+            </SheetContent>
+          </Sheet>
         </div>
       </header>
       <main className="flex-1">{children}</main>
