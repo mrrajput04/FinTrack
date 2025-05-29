@@ -1,9 +1,9 @@
-// {
-//   /* TODO: Implement shell */
-// }
+{
+  /* TODO: Implement shell */
+}
+\
+Let me implement the most important features first:
 
-
-// Let me implement the most important features first:
-
-// First,
-// let's implement dark mode by adding a theme toggle component:
+First,
+let
+'s implement dark mode by adding a theme toggle component:

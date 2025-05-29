@@ -34,8 +34,12 @@ import { IncomeExpenseChart } from "@/components/income-expense-chart"
 import { RecentTransactions } from "@/components/recent-transactions"
 import { SavingsGoals } from "@/components/savings-goals"
 import { DateRangePicker } from "@/components/date-range-picker"
+import { IncomeBreakdown } from "@/components/income-breakdown"
+import { EnhancedExpenseBreakdown } from "@/components/enhanced-expense-breakdown"
+import { useAuth } from "@/contexts/auth-context"
 
 export function DashboardPage() {
+  const { user } = useAuth()
   const [selectedDateRange, setSelectedDateRange] = useState<{ from: Date; to: Date }>({
     from: new Date(new Date().setDate(new Date().getDate() - 30)),
     to: new Date(),
@@ -124,6 +128,8 @@ export function DashboardPage() {
           <div className="flex items-center justify-between">
             <TabsList>
               <TabsTrigger value="overview">Overview</TabsTrigger>
+              <TabsTrigger value="income">Income Analysis</TabsTrigger>
+              <TabsTrigger value="expenses">Expense Analysis</TabsTrigger>
               <TabsTrigger value="transactions">Transactions</TabsTrigger>
               <TabsTrigger value="budgets">Budgets</TabsTrigger>
               <TabsTrigger value="goals">Goals</TabsTrigger>
@@ -224,6 +230,12 @@ export function DashboardPage() {
                 </CardFooter>
               </Card>
             </div>
+          </TabsContent>
+          <TabsContent value="income" className="space-y-4">
+            <IncomeBreakdown userId={user?.id} dateRange={selectedDateRange} />
+          </TabsContent>
+          <TabsContent value="expenses" className="space-y-4">
+            <EnhancedExpenseBreakdown userId={user?.id} dateRange={selectedDateRange} />
           </TabsContent>
           <TabsContent value="transactions" className="space-y-4">
             <Card>
