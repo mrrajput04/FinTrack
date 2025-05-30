@@ -9,26 +9,26 @@ import { Toaster } from "@/components/ui/toaster"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "FinTrack - Personal Finance Management",
-  description: "Take control of your finances with FinTrack's comprehensive personal finance management tools.",
-    generator: 'v0.dev'
+	title: "FinTrack - Personal Finance Management",
+	description: "Take control of your finances with FinTrack's comprehensive personal finance management tools.",
+	generator: 'v0.dev'
 }
 
 export default function RootLayout({
-  children,
+	children,
 }: {
-  children: React.ReactNode
+	children: React.ReactNode
 }) {
-  return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <AuthProvider>
-            {children}
-            <Toaster />
-          </AuthProvider>
-        </ThemeProvider>
-      </body>
-    </html>
-  )
+	return (
+		<html lang="en" suppressHydrationWarning>
+			<body className={inter.className}>
+				<ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+					<AuthProvider>
+						{children}
+						<Toaster />
+					</AuthProvider>
+				</ThemeProvider>
+			</body>
+		</html>
+	)
 }
