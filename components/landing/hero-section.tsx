@@ -329,7 +329,7 @@ export function HeroSection() {
                   />
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                   {[1, 2, 3, 4].map((i) => (
                     <motion.div
                       key={i}
@@ -365,7 +365,7 @@ export function HeroSection() {
 
                 <div className="h-32 rounded-xl bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm border border-white/10 p-4">
                   <div className="w-1/2 h-4 bg-gradient-to-r from-pink-400 to-purple-400 rounded mb-3"></div>
-                  <div className="flex items-end space-x-2 h-16">
+                  <div className="flex items-end justify-between space-x-1 sm:space-x-2 h-16">
                     {[40, 60, 30, 80, 50, 70, 45].map((height, i) => (
                       <motion.div
                         key={i}
@@ -392,7 +392,7 @@ export function HeroSection() {
 
             {/* Floating stats */}
             <motion.div
-              className="absolute top-8 -right-12 p-4 rounded-2xl bg-gradient-to-r from-green-400 to-emerald-500 text-white shadow-lg"
+              className="absolute top-4 lg:top-8 -right-8 lg:-right-12 p-4 rounded-2xl bg-gradient-to-r from-green-400 to-emerald-500 text-white shadow-lg"
               animate={{
                 y: [0, -10, 0],
                 boxShadow: [
@@ -418,7 +418,7 @@ export function HeroSection() {
             </motion.div>
 
             <motion.div
-              className="absolute bottom-8 -left-12 p-4 rounded-2xl bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg"
+              className="absolute bottom-4 lg:bottom-8 -left-8 lg:-left-12 p-4 rounded-2xl bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg"
               animate={{
                 y: [0, 10, 0],
                 boxShadow: [

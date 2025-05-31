@@ -41,7 +41,11 @@ export default function LoginPage() {
 				description: "Welcome back to FinTrack!",
 			})
 
-			router.push("/dashboard")
+			// The router.push is now handled in the signIn function
+			// but we can add a fallback here
+			setTimeout(() => {
+				router.push("/dashboard")
+			}, 100)
 		} catch (error: any) {
 			toast({
 				variant: "destructive",

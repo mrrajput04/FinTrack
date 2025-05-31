@@ -68,9 +68,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           router.push("/login")
         }
 
-        // Handle sign in
+        // Handle sign in - only redirect if we're currently on login/signup pages
         if (event === "SIGNED_IN" && session) {
-          router.push("/dashboard")
+          const currentPath = window.location.pathname
+          if (currentPath === "/login" || currentPath === "/signup") {
+            router.push("/dashboard")
+          }
         }
       }
     })
@@ -121,6 +124,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         email,
         password,
       })
+
+      if (!error) {
+        // Force navigation to dashboard after successful login
+        router.push("/dashboard")
+      }
 
       return { error }
     } catch (error) {
